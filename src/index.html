@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="vi">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>DevTools — Bộ công cụ cho lập trình viên</title>
+  <meta name="description" content="Text compare, JSON checker, JSON compare, JSON formatter, JSON minify, Base64, JSON escape — chạy offline trên trình duyệt.">
+  <meta name="theme-color" content="#2563eb">
+  <link rel="manifest" href="manifest.webmanifest">
+  <link rel="icon" href="icons/icon.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="icons/icon-192.png">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-title" content="DevTools">
+  <link rel="stylesheet" href="css/styles.css">
+  <script>window.__BUILD__ = 'dev';</script>
+  <script type="module" src="js/app.js"></script>
+</head>
+<body>
+  <a class="skip" href="#main">Bỏ qua tới nội dung</a>
+  <header class="topbar">
+    <button id="menu-toggle" class="btn icon-only" type="button" aria-label="Menu công cụ" aria-controls="sidebar" aria-expanded="false" data-testid="menu-toggle">
+      <span class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M3 6h18M3 12h18M3 18h18"/></svg></span>
+    </button>
+    <a class="brand" href="#/"><img src="icons/icon.svg" alt="" width="26" height="26"><span>DevTools</span></a>
+    <span id="page-title" class="page-title"></span>
+    <span class="spacer"></span>
+    <span class="offline-badge" title="Không có mạng">Offline</span>
+    <button id="history-btn" class="btn" type="button" hidden data-testid="history-btn">
+      <span class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12a9 9 0 1 0 3-6.7L3 8M3 3v5h5M12 7v5l3 3"/></svg></span><span class="hide-sm">Lịch sử</span>
+    </button>
+    <button id="theme-toggle" class="btn icon-only" type="button" aria-label="Đổi giao diện sáng/tối" data-testid="theme-toggle"></button>
+  </header>
+  <div class="layout">
+    <nav id="sidebar" class="sidebar" aria-label="Công cụ"><div id="nav"></div></nav>
+    <div id="backdrop" class="backdrop"></div>
+    <main id="main" class="main" tabindex="-1"></main>
+    <aside id="history" class="drawer" hidden aria-label="Lịch sử" data-testid="history-drawer">
+      <div class="drawer-head">
+        <h2>Lịch sử</h2>
+        <button id="history-clear" class="btn" type="button">Xoá hết</button>
+        <button id="history-close" class="btn icon-only" type="button" aria-label="Đóng">✕</button>
+      </div>
+      <div id="history-list" class="drawer-body"></div>
+    </aside>
+  </div>
+  <div id="update-bar" class="update-bar" hidden role="alert">
+    <span>Đã có phiên bản mới.</span>
+    <button id="update-reload" class="btn primary" type="button">Tải lại</button>
+  </div>
+  <noscript><p style="padding:16px">Ứng dụng cần JavaScript để hoạt động.</p></noscript>
+</body>
+</html>
