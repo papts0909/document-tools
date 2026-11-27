@@ -2,6 +2,7 @@ import { defineConfig, devices } from '@playwright/test';
 
 const PORT = 5174;
 const dir = process.env.E2E_DIR || 'src';
+const BASE = '/document-tools/'; // giống production: https://marc.io.vn/document-tools/
 
 export default defineConfig({
   testDir: 'tests/e2e',
@@ -11,12 +12,12 @@ export default defineConfig({
   retries: process.env.CI ? 1 : 0,
   reporter: process.env.CI ? [['list'], ['html', { open: 'never' }]] : 'list',
   use: {
-    baseURL: `http://localhost:${PORT}/`,
+    baseURL: `http://localhost:${PORT}${BASE}`,
     trace: 'off',
   },
   projects: [
     { name: 'desktop', use: { ...devices['Desktop Chrome'], permissions: ['clipboard-read', 'clipboard-write'] } },
     { name: 'mobile', use: { ...devices['Pixel 7'] }, testMatch: /uat\.spec/ },
   ],
-  webServer: { command: `node scripts/serve.mjs ${dir} ${PORT}`, port: PORT, reuseExistingServer: !process.env.CI },
+  webServer: { command: `node scripts/serve.mjs ${dir} ${PORT} ${BASE}`, url: `http://localhost:${PORT}${BASE}`, reuseExistingServer: !process.env.CI },
 });

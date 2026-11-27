@@ -116,3 +116,13 @@ test('UAT-08: Không có tràn ngang trên màn hình nhỏ', async ({ page, isM
     expect(overflow, `overflow on ${id || 'home'}`).toBeLessThanOrEqual(0);
   }
 });
+
+test('UAT-09: Chạy đúng dưới đường dẫn con /document-tools/ (manifest, SW scope, tài nguyên)', async ({ page, request }) => {
+  await open(page);
+  expect(new URL(page.url()).pathname).toBe('/document-tools/');
+  const scope = await page.evaluate(async () => (await navigator.serviceWorker.ready).scope);
+  expect(new URL(scope).pathname).toBe('/document-tools/');
+  const manifest = await (await request.get('manifest.webmanifest')).json();
+  expect(manifest.start_url).toBe('./');
+  for (const icon of manifest.icons) expect((await request.get(icon.src)).ok()).toBe(true);
+});

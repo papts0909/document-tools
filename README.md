@@ -2,6 +2,8 @@
 
 Bộ công cụ cho lập trình viên chạy hoàn toàn trên trình duyệt, cài được như ứng dụng (PWA), dùng offline.
 
+**Bản web: https://marc.io.vn/document-tools/**
+
 | Công cụ | Chức năng |
 |---|---|
 | **Text Compare** | Diff theo dòng (Myers), highlight từng từ, xem song song / gộp, bỏ qua hoa-thường / khoảng trắng / trim, chỉ hiện thay đổi, tải `.patch` |
@@ -35,3 +37,12 @@ Không cần bundler: mã nguồn ES modules trong `src/`.
 
 Workflow `.github/workflows/ci-deploy.yml`: mỗi push chạy unit test → build → E2E/UAT trên bản build; push lên nhánh mặc định thì deploy lên **GitHub Pages**.
 Lần đầu cần bật: *Settings → Pages → Source: GitHub Actions*.
+
+### Tên miền `marc.io.vn/document-tools`
+
+Repo này **không** có file `CNAME`: app dùng đường dẫn tương đối nên chạy được ở mọi đường dẫn con, và kế thừa tên miền của user site `papts0909.github.io` (giống `mintmath`). Muốn đổi tên miền thì đổi ở user site:
+
+1. DNS của `marc.io.vn`: bản ghi `A` → `185.199.108.153`, `185.199.109.153`, `185.199.110.153`, `185.199.111.153` (và `AAAA` → `2606:50c0:8000::153` … `8003::153`); `www` → `CNAME papts0909.github.io`.
+2. Repo `papts0909.github.io` → *Settings → Pages → Custom domain*: `marc.io.vn`, bật *Enforce HTTPS*.
+
+E2E chạy app dưới `/document-tools/` để giống production.
