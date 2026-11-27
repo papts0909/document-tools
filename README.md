@@ -2,7 +2,7 @@
 
 Bộ công cụ cho lập trình viên chạy hoàn toàn trên trình duyệt, cài được như ứng dụng (PWA), dùng offline.
 
-**Bản web: https://marc.io.vn/document-tools/**
+**Bản web: https://document-tools.marc.io.vn/**
 
 | Công cụ | Chức năng |
 |---|---|
@@ -38,11 +38,9 @@ Không cần bundler: mã nguồn ES modules trong `src/`.
 Workflow `.github/workflows/ci-deploy.yml`: mỗi push chạy unit test → build → E2E/UAT trên bản build; push lên nhánh mặc định thì deploy lên **GitHub Pages**.
 Lần đầu cần bật: *Settings → Pages → Source: GitHub Actions*.
 
-### Tên miền `marc.io.vn/document-tools`
+### Tên miền `document-tools.marc.io.vn`
 
-Repo này **không** có file `CNAME`: app dùng đường dẫn tương đối nên chạy được ở mọi đường dẫn con, và kế thừa tên miền của user site `papts0909.github.io` (giống `mintmath`). Muốn đổi tên miền thì đổi ở user site:
+1. DNS (Cloudflare): `CNAME document-tools → papts0909.github.io`, chế độ **DNS only**.
+2. Repo này → *Settings → Pages → Custom domain*: `document-tools.marc.io.vn`, bật *Enforce HTTPS*.
 
-1. DNS của `marc.io.vn`: bản ghi `A` → `185.199.108.153`, `185.199.109.153`, `185.199.110.153`, `185.199.111.153` (và `AAAA` → `2606:50c0:8000::153` … `8003::153`); `www` → `CNAME papts0909.github.io`.
-2. Repo `papts0909.github.io` → *Settings → Pages → Custom domain*: `marc.io.vn`, bật *Enforce HTTPS*.
-
-E2E chạy app dưới `/document-tools/` để giống production.
+Workflow deploy bằng GitHub Actions nên domain lưu trong Settings (không cần file `CNAME`). App dùng đường dẫn tương đối nên chạy được cả ở gốc domain lẫn đường dẫn con; E2E mặc định chạy ở `/`, thử đường dẫn con bằng `E2E_BASE=/document-tools/ npm run test:e2e`.

@@ -2,7 +2,8 @@ import { defineConfig, devices } from '@playwright/test';
 
 const PORT = 5174;
 const dir = process.env.E2E_DIR || 'src';
-const BASE = '/document-tools/'; // giống production: https://marc.io.vn/document-tools/
+// Production: https://document-tools.marc.io.vn/ (gốc domain). Đặt E2E_BASE=/document-tools/ để thử dưới đường dẫn con.
+const BASE = process.env.E2E_BASE || '/';
 
 export default defineConfig({
   testDir: 'tests/e2e',

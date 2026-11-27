@@ -117,11 +117,12 @@ test('UAT-08: Không có tràn ngang trên màn hình nhỏ', async ({ page, isM
   }
 });
 
-test('UAT-09: Chạy đúng dưới đường dẫn con /document-tools/ (manifest, SW scope, tài nguyên)', async ({ page, request }) => {
+test('UAT-09: Manifest, SW scope và tài nguyên đúng với đường dẫn triển khai', async ({ page, request, baseURL }) => {
+  const base = new URL(baseURL).pathname;
   await open(page);
-  expect(new URL(page.url()).pathname).toBe('/document-tools/');
+  expect(new URL(page.url()).pathname).toBe(base);
   const scope = await page.evaluate(async () => (await navigator.serviceWorker.ready).scope);
-  expect(new URL(scope).pathname).toBe('/document-tools/');
+  expect(new URL(scope).pathname).toBe(base);
   const manifest = await (await request.get('manifest.webmanifest')).json();
   expect(manifest.start_url).toBe('./');
   for (const icon of manifest.icons) expect((await request.get(icon.src)).ok()).toBe(true);
